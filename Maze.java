@@ -11,7 +11,6 @@ public class Maze {
     private char[][] solution;
     public int row; // changed to public
     public int col; // changed to public
-
     /**
      * Instantiate a new Maze object.
      */
@@ -26,12 +25,27 @@ public class Maze {
     }
 
     private void fillMap(char[][] map) {
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
-                map[i][j] = '.';
+       
+        
+
+        for (int i = 1; i < 11; i++) {
+            for (int j = 1; j < 11; j++) {
+                for (int a = 1; a < 11; a++){
+                    map[a][0] = '1';
+                } for (int b = 1; b < 11; b++){
+                    map[0][b] = '1';
+                }
+                map[i][j] = '-';
             }
+            /*
+            map[1][0] = 1;
+            map[2][0] = 2;
+            map[3][0] = 3;
+            map[0][1] = 1;
+            */
         }
-        myMap[row][col] = 'x';
+    
+        //myMap[row][col] = 'x';
     }
 
     /**
@@ -43,13 +57,18 @@ public class Maze {
     }
 
     private void printMap(char[][] map) {
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
-                System.out.print(map[i][j] + " ");
+        
+            for (int i = 0; i < 11; i++) {
+                for (int j = 0; j < 11; j++) {
+                    
+                    System.out.print(map[i][j] + " ");
+
+                }
+                System.out.println();   
             }
             System.out.println();
-        }
-        System.out.println();
+            
+            
     }
 
     private boolean isThereAPit(int rowMove, int colMove) {
@@ -288,26 +307,15 @@ public class Maze {
         for (int i = 14; i < 17; i++) {
             solution[i][0] = '|';
         }
-        addPits();
-
+  
         if (printSolution.equals("Y")) {
             printMap(solution);
         }
-        printMap(solution);
+        //printMap(solution);
     }
 
 
-    private void addPits(){
-        solution[1][2] = '0';
-        solution[3][7] = '0';
-        solution[3][12] = '0';
-        solution[6][4] = '0';
-        solution[15][4] = '0';
-        solution[9][10] = '0';
-        //solution[13][17] = '0';
-        solution[13][15] = '0';
-        solution[18][10] = '0';
-    }
+    
 
     /**
      * Determines if the user reached the end of the maze.
