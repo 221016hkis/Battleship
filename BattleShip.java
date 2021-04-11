@@ -12,6 +12,7 @@ public class BattleShip {
         
         myBattle.printMap();
         myBattle.generateShips();
+        System.out.println("test");
     }
 
 
