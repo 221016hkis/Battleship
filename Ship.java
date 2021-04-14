@@ -93,7 +93,7 @@ public class Ship {
         boolean direction = getHor();
 
         while (!gb.isEmpty(x, y)) {
-            x = r.nextInt(9); //places the ships at a random sempty pot on the map
+            x = r.nextInt(9); //places the ships at a random empty pot on the map
             y = r.nextInt(9);
         }
 
