@@ -1,9 +1,9 @@
 import java.util.*;
 
-public class Gameboard
-{
+public class Gameboard {
+
     //Creating instance variables
-    private char[][] gameboard; 
+    private char[][] board; 
     private char[][] publicGB; 
     private Ship ship1;
     private Ship ship2;
@@ -18,19 +18,20 @@ public class Gameboard
     
 
     
-    public Gameboard()
-    {
+    public Gameboard(){
         //initialise instance variables
-        gameboard = new char[9][9];
+        board = new char[9][9];
         publicGB = new char[9][9];
 
         //Fills the board up
-        for (int i = 0; i<9; i++) {
-            for (int j = 0; j<9; j++) {
-                gameboard[i][j] = '-';
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                board[i][j] = '-';
                 publicGB[i][j] = '-';
             }
         }
+
+        System.out.println("Gameboard initiliased");
         
         //generates the ships but doesn't place them yet
         ship1 = new Ship(5); // the number after Ship() is the size of the ship
@@ -40,6 +41,8 @@ public class Gameboard
         ship5 = new Ship(2);
         ships = new Ship[]{ship1, ship2, ship3, ship4, ship5};
         this.placeShips();
+
+        System.out.println("Ship's placed");
     }
 
     public int shots(){ //Records the number of shots
@@ -49,8 +52,8 @@ public class Gameboard
     public double percent() { //calculates the percentage to later on print the stats
         int shots = hits+missed;
         double percent;
-        if (shots>0) {
-            percent = (hits*100.0/shots);
+        if (shots > 0) {
+            percent = (hits * 100.0 / shots);
         }
         else {
             percent = 0.0;
@@ -60,26 +63,30 @@ public class Gameboard
 
 
     public boolean isEmpty(int x, int y) { 
-        return (gameboard[x][y] == '.');
+        if (board[x][y] == '-'){
+            return true;
+        } else {
+            return false;
+        } 
     }
     
     public boolean publicEmpty(int x, int y) {
-        return (publicGB[x][y] == '.');
+        return (publicGB[x][y] == '-');
     }
     
     public void editGB(int x, int y, char symbol){
-        gameboard[x][y] = symbol;
+        board[x][y] = symbol;
     }
     
     public boolean haveIWon(){ //Checks if all of the ships have been sunk to see if the user wins
-        if (sunkenShips.size()!=5){
+        if (sunkenShips.size() != 5){
             return false;
         }
         return true;
     }
 
     private void placeShips() { //calls the placeship method in Ship
-        for (int i = 0; i<ships.length; i++) {
+        for (int i = 0; i < ships.length; i++) {
             ships[i].placeShip(this);
         }
     }
@@ -87,7 +94,7 @@ public class Gameboard
  
 
     public void fire(int x, int y) {
-        if (x>8 || x<0 || y>8 || y<0) { //makes sure that the shot fire is within the board
+        if (x > 8 || x < 0 || y > 8 || y < 0) { //makes sure that the shot fire is within the board
             System.out.println("Illegal coordinates."); //if it's outside it will print out an error
         }
         else if (!this.publicEmpty(x, y)) { // notifies the user if they are trying to fire on a previously fired upon coordinate
@@ -110,7 +117,7 @@ public class Gameboard
                     int[] row = shipx.getRow();
                     int[] column = shipx.getColumn();
                     char sym = shipx.getSymbol(); // fetches the row and column of the boat to know which boat it was and then prints out the coresponding symbol for it
-                    for (int j = 0; j<shipx.getLength(); j++) {
+                    for (int j = 0; j < shipx.getLength(); j++) {
                         int x1 = row[j];
                         int y1 = column[j];
                         publicGB[x1][y1] = sym;
@@ -129,11 +136,11 @@ public class Gameboard
     
     public void printBoard() { // prints the board 
         System.out.println("  0 1 2 3 4 5 6 7 8");
-        for (int i = 0; i<9; i++) {
+        for (int i = 0; i < 9; i++) {
             String out = Integer.toString(i);
-            for (int j = 0; j<9; j++) {
-                out+= " ";
-                out+= publicGB[i][j];
+            for (int j = 0; j < 9; j++) {
+                out += " ";
+                out += publicGB[i][j];
             }
             System.out.println(out);
         }
@@ -141,11 +148,11 @@ public class Gameboard
     
     public void printCheatBoard() { 
         System.out.println("  0 1 2 3 4 5 6 7 8");
-        for (int i = 0; i<9; i++) {
+        for (int i = 0; i < 9; i++) {
             String out = Integer.toString(i);
-            for (int j = 0; j<9; j++) {
-                out+= " ";
-                out+= gameboard[i][j];
+            for (int j = 0; j < 9; j++) {
+                out += " ";
+                out += board[i][j];
             }
             System.out.println(out);
         }
