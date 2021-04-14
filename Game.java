@@ -22,7 +22,7 @@ public class Game {
 
         
 
-        while (!gameboard.haveIWon()) {
+        while (gameboard.haveIWon() == false) {
             String command = scan.next();
             /* made use of the switch function which is a little similar 
             to if statements but uses less syntax. Here it checks what the user inputs and then 
@@ -78,8 +78,13 @@ public class Game {
             }
 
         }
-        stats();
+        
         scan.close();
+        if(gameboard.haveIWon() == true){
+            System.out.println("Woohooo you won! Here are your stats:");
+        }
+        stats();
+        System.exit(0);
     }
 
     private static void stats(){ //Calculates the user's stats according to how many shots they have fire and ships they have sunk

@@ -5,7 +5,6 @@ public class Ship {
     // creating instances variables
     private int[] row;
     private int[] column;
-    private boolean sunken;
     private int length;
     private char symbol;
 
